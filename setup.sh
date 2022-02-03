@@ -1,8 +1,9 @@
 #!/bin/sh
 ############################################################
 #                                                          #
-#       LAZY ARTIX RUNIT SETUP SCRIPT                      #
-#       NO DESKTOP ENVIRONMENT, ONLY BASIC UTILITIES       #
+#       LAZY ARTIX OPENRC SETUP SCRIPT                     #
+#       NO DESKTOP ENVIRONMENT, ONLY BASIC UTILITIES	   #
+#	BUT WITH BTRFS INSTEAD				   #
 #                                                          #
 ############################################################
 
