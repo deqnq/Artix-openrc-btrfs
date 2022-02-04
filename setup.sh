@@ -20,8 +20,7 @@ function splash() {
 ## PART 1
 
 printf '\033c'
-echo "Welcome to Pixel's artix installer script!"
-splash 'Warning! This script assumes you have a separate /home partition !'
+splash "Welcome to Pixel's artix quick setup script"
 sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
 pacman --noconfirm -Sy archlinux-keyring
 lsblk
@@ -30,7 +29,6 @@ lsblk
 echo "Enter the drive: "
 read drive
 cfdisk $drive
-gdisk $drive
 
   echo "Enter the root partition: "
   read root
@@ -53,7 +51,7 @@ mount -o noatime,compress=zstd,ssd,discard=async,space_cache=v2,subvol=@var $roo
 
 mount $efi /mnt/boot/efi
 
-basestrap /mnt base base-devel linux linux-firmware openrc btrfs-progs intel-ucode vim
+basestrap /mnt base base-devel linux linux-firmware openrc elogind-openrc btrfs-progs intel-ucode vim
 fstabgen -U /mnt >> /mnt/etc/fstab
 sed '1,/^##PART 2$/d' setup.sh > /mnt/setup2.sh
 chmod +x /mnt/setup2.sh
@@ -65,7 +63,7 @@ exit
 printf '\033c'
 pacman -S --noconfirm sed artix-archlinux-support
 pacman-key --populate archlinux
-sed -i "s/^#ParallelDownloads$/ParallelDownloads/" /etc/pacman.conf
+sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
 sed -i "s/^#[lib32]$/[lib32]/" /etc/pacman.conf
 sed -i "s/^#Include = /etc/pacman.d/mirrorlist$/Include = /etc/pacman.d/mirrorlist/" /etc/pacman.conf
 
@@ -99,18 +97,19 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
 rc-update add NetworkManager default
+rc-update add bluetoothd default
 
 splash 'Installing important base programs'
 
 pacman -S --noconfirm xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xbacklight xorg-xprop xf86-video-intel\
-     noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono ttf-joypixels ttf-font-awesome \
+     noto-fonts noto-fonts-emoji ttf-droid ttf-jetbrains-mono ttf-joypixels ttf-font-awesome \
      sxiv mpv zathura zathura-pdf-mupdf ffmpeg imagemagick  \
      fzf man-db xwallpaper youtube-dl unclutter xclip maim \
      zip unzip unrar xdotool papirus-icon-theme brightnessctl  \
      ntfs-3g git sxhkd zsh pipewire pipewire-pulse \
-     vim neovim arc-gtk-theme rsync firefox dash \
+     neovim ed vi arc-gtk-theme rsync firefox dash \
      xcompmgr libnotify dunst slock jq valgrind clang llvm bind rust go \
-     rsync pamixer openssh
+     rsync pamixer openssh openssh-openrc
 
 
 rc-update add sshd default
