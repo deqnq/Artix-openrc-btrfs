@@ -88,7 +88,7 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 echo "Hostname: "
 read hostname
 echo $hostname > /etc/hostname
-printf "\n127.0.0.1       localhost\n::1             localhost\n 127.0.1.1       $hostname.localdomain $hostname\n">> /etc/hosts
+printf "\n127.0.0.1       localhost\n::1             localhost\n127.0.1.1       $hostname.localdomain $hostname\n">> /etc/hosts
 passwd
 pacman --noconfirm -Sy grub efibootmgr grub-btrfs networkmanager networkmanager-openrc network-manager-applet dosfstools linux-headers bluez bluez-openrc bluez-utils
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
