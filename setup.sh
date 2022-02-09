@@ -28,11 +28,11 @@ lsblk
 
 echo "Enter the drive: "
 read drive
-cfdisk $drive
+fdisk $drive
 
   echo "Enter the root partition: "
   read root
-  mkfs.btrfs $root
+  mkfs.btrfs -f $root
 
   echo "Enter EFI partition: "
   read efi
@@ -78,7 +78,10 @@ Include = /etc/pacman.d/mirrorlist-arch
 #Include = /etc/pacman.d/mirrorlist-arch" >> /etc/pacman.conf
 pacman -Sy
 
-ln -sf /usr/share/zoneinfo/Africa/Algiers /etc/localtime
+echo "Enter your Zone info, example : Europe/Paris: "
+read localzone
+
+ln -sf /usr/share/zoneinfo/$localzone /etc/localtime
 hwclock --systohc
 
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
