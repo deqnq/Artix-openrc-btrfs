@@ -64,8 +64,6 @@ printf '\033c'
 pacman -S --noconfirm sed artix-archlinux-support
 pacman-key --populate archlinux
 sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
-sed -i "s/^#[lib32]$/[lib32]/" /etc/pacman.conf
-sed -i "s/^#Include = /etc/pacman.d/mirrorlist$/Include = /etc/pacman.d/mirrorlist/" /etc/pacman.conf
 
 echo "# ARCH
 [extra]
