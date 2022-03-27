@@ -100,7 +100,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 rc-update add NetworkManager default
 rc-update add bluetoothd default
 
-splash 'Installing important base programs'
 
 pacman -S --noconfirm xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xbacklight xorg-xprop xf86-video-intel\
      noto-fonts noto-fonts-emoji ttf-droid ttf-jetbrains-mono ttf-joypixels ttf-font-awesome \
@@ -118,7 +117,6 @@ rc-update add sshd default
 rm /bin/sh
 ln -s dash /bin/sh
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-splash 'Creating a new user with the home directory'
 echo "Enter Username: "
 read username
 useradd -mG wheel $username
