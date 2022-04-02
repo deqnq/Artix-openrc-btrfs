@@ -37,6 +37,7 @@ fdisk $drive
   echo "Enter EFI partition: "
   read efi
   mkfs.fat -F32 $efi
+  fatlabel $efi BOOT
 
 mount $root /mnt
 btrfs subvolume create /mnt/@
@@ -103,9 +104,9 @@ rc-update add bluetoothd default
 splash 'Installing important base programs'
 
 pacman -S --noconfirm xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xbacklight xorg-xprop xf86-video-intel\
-     noto-fonts noto-fonts-emoji ttf-droid ttf-jetbrains-mono ttf-joypixels ttf-font-awesome \
+     noto-fonts noto-fonts-emoji ttf-droid ttf-jetbrains-mono ttf-joypixels ttf-font-awesome ttf-roboto ttf-droid ttf-dejavu \
      sxiv mpv zathura zathura-pdf-mupdf ffmpeg imagemagick  \
-     fzf man-db xwallpaper youtube-dl unclutter xclip maim \
+     fzf man-db man-pages xwallpaper youtube-dl unclutter xclip maim \
      zip unzip unrar xdotool papirus-icon-theme brightnessctl  \
      ntfs-3g git sxhkd zsh pipewire pipewire-pulse \
      neovim ed vi arc-gtk-theme rsync firefox dash \
@@ -123,11 +124,11 @@ echo "Enter Username: "
 read username
 useradd -mG wheel $username
 passwd $username
-ai3_path=/home/$username/setup3.sh
-sed '1,/^## PART 3$/d' setup2.sh > $ai3_path
-chown $username:$username $ai3_path
-chmod +x $ai3_path
-su -c $ai3_path -s /bin/sh $username
+sc_path=/home/$username/setup3.sh
+sed '1,/^## PART 3$/d' setup2.sh > $sc_path
+chown $username:$username $sc_path
+chmod +x $sc_path
+su -c $sc_path -s /bin/sh $username
 exit
 
 ## PART 3
