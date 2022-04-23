@@ -109,7 +109,7 @@ pacman -S --noconfirm xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xback
      zip unzip unrar xdotool papirus-icon-theme brightnessctl  \
      ntfs-3g git sxhkd zsh pipewire pipewire-pulse \
      neovim ed vi arc-gtk-theme rsync firefox dash \
-     xcompmgr libnotify dunst slock jq valgrind clang llvm bind rust go \
+     xcompmgr libnotify dunst slock jq valgrind clang llvm bind go \
      rsync pamixer openssh openssh-openrc
 
 
